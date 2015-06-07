@@ -6,3 +6,4 @@
 /target/
 /ensime-server/
 /.ensime
+/.idea/
