@@ -25,6 +25,38 @@ abstract class Field {
 
   def toCandidateString = makeFieldLikeString(_.candidateString)
 
+  def position(x: Int, y: Int): Int = x * rows + y
+
+  def rowNum(index: Int) = index / rows
+  def columnNum(index: Int) = index % rows
+  def squareNum(index: Int) = columnNum / dimension + (rowNum / dimension) * dimension
+
+
+  private def isSameRow(that: Cell): Boolean = {
+    //自分自身とは同じ行ではないとみなす。
+    this.rowNum == that.rowNum && this.index != that.index
+  }
+
+  private def isSameColumn(that: Cell): Boolean = {
+    //自分自身とは同じ列ではないとみなす。
+    this.columnNum == that.columnNum && this.index != that.index
+  }
+
+  private def isSameSquare(that: Cell): Boolean = {
+    //自分自身とは同じ正方形ではないとみなす。
+    this.squareNum == that.squareNum && this.index != that.index
+  }
+
+  def isSameScope(that: Cell): Boolean = {
+    //同じ行or列or正方形なら同じスコープ。
+    this.isSameRow(that) || this.isSameColumn(that) || this.isSameSquare(that)
+  }
+
+  def candidateString = {
+    val candidateSeq = (1 to rows) map (i => if (candidate contains i) i.toString else " ")
+    "|" + candidateSeq.mkString("").formatted("%9s")
+  }
+
   //同じスコープに同じ数字が入るとfalseを返す
   def isValid: Boolean = cells.filter(_.number > 0).forall(
     i => !cells.filter(_.number == i.number).exists(_.isSameScope(i)))
@@ -56,7 +88,6 @@ abstract class Field {
     println("問題が解けました。")
     println(this)
   }
-
   def apply(a: Int, b: Int): Cell = apply(a * rows + b)
 
   def apply(a: Int): Cell = cells(a)

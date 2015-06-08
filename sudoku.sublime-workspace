@@ -7,6 +7,33 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/scala/Cell.scala",
+			"settings":
+			{
+				"buffer_size": 3041,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import scala.collection.immutable.IndexedSeq\n\n/**\n * Created by Atsushi on 13/12/10.\n */\nabstract class Field {\n  val dimension: Int\n  val nestLevel: Int\n  val fieldName: String\n  val whatIfFieldName: String\n  var cells: List[Cell]\n  val timesOfWhatIf: Int\n  var maxNestLevel = 0\n  lazy val rows = dimension * dimension\n  lazy val rowsIndices: Range = 0 until rows\n  lazy val grids = rows * rows\n  lazy val possibleNumbers = (1 to rows).toSet\n\n  private def makeFieldLikeString(func: (Cell) => String): String = {\n    for {i <- 0 until rows} yield cells.map(func).slice(i * rows, (i + 1) * rows).mkString(\" \")\n  }.mkString(System.getProperty(\"line.separator\"))\n\n  override def toString = fieldName + \" \" + whatIfFieldName +\n    System.getProperty(\"line.separator\") + makeFieldLikeString(_.toString)\n\n  def toCandidateString = makeFieldLikeString(_.candidateString)\n\n  //同じスコープに同じ数字が入るとfalseを返す\n  def isValid: Boolean = cells.filter(_.number > 0).forall(\n    i => !cells.filter(_.number == i.number).exists(_.isSameScope(i)))\n\n  private def updateNumber() {\n    cells.foreach(_.update())\n    //assert(this.cells forall (_.candidate.size > 0), \"矛盾が発生しました。候補が0のセルがあります。\")\n  }\n\n  def weakestCellIndices: List[Int] = {\n    cells.filter(!_.isFixed).filter(\n      i => i.candidate.size == cells.filter(!_.isFixed).map(_.candidate.size).min).map(_.index)\n  }\n\n  def simpleSolve(): Unit = {\n    while (hasChanged) {\n      updateNumber()\n      println(this)\n      println(this.toCandidateString)\n      assert(this.isValid, \"矛盾が発生しました。同じスコープに同じ数字が入っています。\")\n    }\n  }\n\n  private def hasChanged: Boolean = cells.exists(_.hasChanged)\n\n  def isSolved: Boolean = cells.forall(_.number > 0)\n\n  def finish(): Unit = {\n    println(\"問題が解けました。\")\n    println(this)\n  }\n  def apply(a: Int, b: Int): Cell = apply(a * rows + b)\n\n  def apply(a: Int): Cell = cells(a)\n}\n\nobject Field {\n\n  private class problemField(val input: Input) extends Field {\n    val timesOfWhatIf = 0\n    val problemNum: Int = input.problemNum\n    val fieldName = \"problem\" + problemNum\n    val whatIfFieldName = \"normal\"\n    val dimension = input.dimension\n    val nestLevel = 0\n    var cells = input.inputList.indices.toList map (i => new Cell(dimension, i, input(i)))\n  }\n\n  private class whatIfField(val num: Int, val prevField: Field) extends Field {\n    val timesOfWhatIf = num\n    val dimension = prevField.dimension\n    val nestLevel = prevField.nestLevel + 1\n    val fieldName = prevField.fieldName\n    val whatIfFieldName = \"what-if field number = \" + num + \", nest level = \" + nestLevel\n    var cells = prevField.cells.map(_.copy(field = this))\n    val defaultCells = {\n      updateNumber()\n      cells\n    }\n    val targetCellIndices = prevField.weakestCellIndices\n\n    def isContradicted: Boolean = {\n      cells.exists(_.candidate.size == 0)\n    }\n\n    def selectTarget = {}\n\n    def assumeNumber() = {\n      for (targetCellIndex <- targetCellIndices) {\n        val targetNumber: Int = cells(targetCellIndex).candidate.head\n        val prevCells = defaultCells\n        cells(targetCellIndex).number = targetNumber\n        simpleSolve()\n        if (isContradicted) {\n          cells = prevCells\n          cells(targetCellIndex).candidate -= targetNumber\n          simpleSolve()\n        }\n      }\n    }\n  }\n\n  def makeField(input: Input): Field = {\n    val problem = new problemField(input)\n    problem.updateNumber()\n    assert(problem.isValid)\n    problem\n  }\n\n  def solve(field: Field) {\n    field.simpleSolve()\n  }\n\n  def whatIfSolve(prevField: Field): Unit = {\n    println(\n      \"\"\"\n        |**************************\n        |*whatIf開始\n        |**************************\n      \"\"\".stripMargin)\n    val whatIfField = new whatIfField(prevField.timesOfWhatIf + 1, prevField)\n    whatIfField.assumeNumber()\n    if (whatIfField.isSolved) whatIfField.finish()\n    else whatIfSolve(whatIfField)\n  }\n}",
+			"file": "src/main/scala/Field.scala",
+			"file_size": 4023,
+			"file_write_time": 130781640161149904,
+			"settings":
+			{
+				"buffer_size": 3862,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/main.scala",
+			"settings":
+			{
+				"buffer_size": 694,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -15,25 +42,25 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "sbt",
+		"height": 337.0,
+		"last_filter": "Package Control: ",
 		"selected_items":
 		[
-			[
-				"sbt",
-				"SublimeREPL: SBT for opened folder"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
-			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
 			],
 			[
 				"git",
-				"Git: Commit"
+				"Git: Push"
+			],
+			[
+				"sbt",
+				"SBT: Start SBT"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
 			],
 			[
 				"ins",
@@ -44,7 +71,7 @@
 				"ColorSchemeSelector: Select Color Scheme"
 			]
 		],
-		"width": 457.0
+		"width": 416.0
 	},
 	"console":
 	{
@@ -64,15 +91,22 @@
 	},
 	"expanded_folders":
 	[
-		"/home/atsfour/workspace/sudoku"
+		"/home/atsfour/workspace/sudoku",
+		"/home/atsfour/workspace/sudoku/src",
+		"/home/atsfour/workspace/sudoku/src/main",
+		"/home/atsfour/workspace/sudoku/src/main/scala",
+		"/home/atsfour/workspace/sudoku/src/test",
+		"/home/atsfour/workspace/sudoku/src/test/scala"
 	],
 	"file_history":
 	[
+		"/home/atsfour/workspace/sudoku/src/main/scala/Input.scala",
+		"/home/atsfour/workspace/sudoku/.gitignore",
+		"/home/atsfour/workspace/sudoku/sudoku.sublime-project",
 		"/home/atsfour/workspace/sicp.sublime-project",
 		"/home/atsfour/workspace/sicp/sicp.sublime-project",
 		"/home/atsfour/.config/sublime-text-3/Packages/SublimeSBT/README.md",
 		"/home/atsfour/workspace/sudoku/build.sbt",
-		"/home/atsfour/workspace/sudoku/.gitignore",
 		"/home/atsfour/workspace/sicp/sicp2.1.scm",
 		"/home/atsfour/workspace/sicp/sicp2.2-2.3.scm",
 		"/home/atsfour/workspace/sicp/sicp1.07.scm",
@@ -114,8 +148,99 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/Cell.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3041,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/Field.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3862,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1086,
+								1086
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/main.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 694,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],

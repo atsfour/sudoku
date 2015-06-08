@@ -1,7 +1,7 @@
 import org.scalatest._
 
-class HelloSpec extends FlatSpec with Matchers {
-  "Hello" should "have tests" in {
-    true should be === true
+class CellSpec extends FlatSpec with Matchers {
+  "Cell" should "value にはオプション値が入る" in {
+    Cell(1) should
   }
 }

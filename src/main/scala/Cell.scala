@@ -3,13 +3,10 @@
 /**
  * Created by Atsushi on 13/12/10.
  */
-case class Cell(val dimension: Int, val index: Int, var number: Int) {
+case class Cell(val dimension: Int, val index: Int, val number: Int) {
   private val rows = dimension*dimension
   private val grids = rows*rows
   private val possibleNumbers = (1 to rows).toSet
-  val rowNum = index / rows
-  val columnNum = index % rows
-  val squareNum = columnNum / dimension + (rowNum / dimension) * dimension
   var candidate: Set[Int] = possibleNumbers
   var prevCandidate: Set[Int] = Set.empty
 
@@ -18,31 +15,6 @@ case class Cell(val dimension: Int, val index: Int, var number: Int) {
   }
 
   override def toString = number.toString
-
-  def candidateString = {
-    val candidateSeq = (1 to rows) map (i => if (candidate contains i) i.toString else " ")
-    "|" + candidateSeq.mkString("").formatted("%9s")
-  }
-
-  private def isSameRow(that: Cell): Boolean = {
-    //自分自身とは同じ行ではないとみなす。
-    this.rowNum == that.rowNum && this.index != that.index
-  }
-
-  private def isSameColumn(that: Cell): Boolean = {
-    //自分自身とは同じ列ではないとみなす。
-    this.columnNum == that.columnNum && this.index != that.index
-  }
-
-  private def isSameSquare(that: Cell): Boolean = {
-    //自分自身とは同じ正方形ではないとみなす。
-    this.squareNum == that.squareNum && this.index != that.index
-  }
-
-  def isSameScope(that: Cell): Boolean = {
-    //同じ行or列or正方形なら同じスコープ。
-    this.isSameRow(that) || this.isSameColumn(that) || this.isSameSquare(that)
-  }
 
   private def hasOnly1Candidate: Boolean = this.candidate.size == 1
 
