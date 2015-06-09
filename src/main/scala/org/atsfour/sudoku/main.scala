@@ -1,5 +1,8 @@
+package org.atsfour.sudoku
+
 import scala.math._
-import scala.io.Source
+import scala.io.Simport org.atsfour.sudoku.Input
+ource
 import sudoku.Field._
 
 /**

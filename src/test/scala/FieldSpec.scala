@@ -1,8 +1,9 @@
 import org.scalatest._
+import org.atsfour.sudoku.Field
 
 class FieldSpec() extends FlatSpec with Matchers {
-
-  "Fleld" should "test" in {
+  
+  "isSameRow" should "" in {
 
   }
 }

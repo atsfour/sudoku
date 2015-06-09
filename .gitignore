@@ -7,3 +7,8 @@
 /ensime-server/
 /.ensime
 /.idea/
+/.classpath
+/.project
+/.metadata/
+/*sublime-project
+/*sublime-workspace
