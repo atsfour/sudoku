@@ -4,9 +4,8 @@
 /project/target/
 /target/
 /ensime-server/
-/.ensime*/
 /.ensime*
 /*sublime*
 /.cache*
-/.scalastyle*
+/scalastyle*
 /activator-launch.jar

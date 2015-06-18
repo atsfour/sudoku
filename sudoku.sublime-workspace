@@ -4,13 +4,133 @@
 		"selected_items":
 		[
 			[
-				"S",
-				"Source"
+				"su",
+				"subPaneHeight	"
+			],
+			[
+				"pref",
+				"prefHeight	"
+			],
+			[
+				"In",
+				"Insets	"
+			],
+			[
+				"pa",
+				"paneHeight	"
+			],
+			[
+				"pane",
+				"paneWidth	"
+			],
+			[
+				"max",
+				"maxHeight	"
+			],
+			[
+				"ro",
+				"rows	"
+			],
+			[
+				"fie",
+				"field	"
+			],
+			[
+				"zi",
+				"zipWithIndex	(CanBuildFrom[Seq[TextField], Tuple2[A1, Int], That])"
+			],
+			[
+				"r",
+				"rows	"
+			],
+			[
+				"s",
+				"shape	"
+			],
+			[
+				"fold",
+				"foldLeft	(B), (Function2[B, TextField, B])"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"field",
+				"fieldBoxes	"
+			],
+			[
+				"tex",
+				"TextField	"
+			],
+			[
+				"la",
+				"layout	"
+			],
+			[
+				"scala",
+				"scalafx	"
+			],
+			[
+				"Tex",
+				"TextField	"
+			],
+			[
+				"im",
+				"import"
+			],
+			[
+				"b",
+				"button"
+			],
+			[
+				"W",
+				"WHITESMOKE	"
+			],
+			[
+				"sc",
+				"scene	"
+			],
+			[
+				"is",
+				"isSameScope	(Int, Int)"
+			],
+			[
+				"z",
+				"zipWithIndex	(CanBuildFrom[Seq[Cell], Tuple2[A1, Int], That])"
+			],
+			[
+				"Ill",
+				"IllegalArgumentException	"
+			],
+			[
+				"re",
+				"require	(Boolean)"
+			],
+			[
+				"num",
+				"numberOp	"
+			],
+			[
+				"B",
+				"Boolean	"
+			],
+			[
+				"row",
+				"rowsIndices	"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/scala/org/atsfour/sudoku/main.scala",
+			"settings":
+			{
+				"buffer_size": 2107,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -20,36 +140,28 @@
 	"command_palette":
 	{
 		"height": 392.0,
-		"last_filter": "s",
+		"last_filter": "sbt",
 		"selected_items":
 		[
 			[
-				"s",
-				"SBT: Start SBT"
+				"sbt",
+				"SBT: Run"
+			],
+			[
+				"git",
+				"Git: Add Current File"
 			],
 			[
 				"Package Control: ",
 				"Package Control: Install Package"
 			],
 			[
-				"Package Control: inst",
-				"Package Control: Install Package"
-			],
-			[
-				"sbt",
+				"s",
 				"SBT: Start SBT"
 			],
 			[
-				"Package Control: in",
-				"Package Control: Install Package"
-			],
-			[
-				"git",
-				"Git: Push"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
+				"Package Control: re",
+				"Package Control: Remove Package"
 			],
 			[
 				"ins",
@@ -58,13 +170,17 @@
 			[
 				"scheme",
 				"ColorSchemeSelector: Select Color Scheme"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
 			]
 		],
 		"width": 416.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 167.0,
 		"history":
 		[
 		]
@@ -81,41 +197,49 @@
 	"expanded_folders":
 	[
 		"/home/atsfour/workspace/sudoku",
-		"/home/atsfour/workspace/sudoku/project"
+		"/home/atsfour/workspace/sudoku/src",
+		"/home/atsfour/workspace/sudoku/src/main",
+		"/home/atsfour/workspace/sudoku/src/main/scala",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku"
 	],
 	"file_history":
 	[
-		"/home/atsfour/workspace/sudoku/project/plugins.sbt",
-		"/home/atsfour/workspace/sudoku/src/main/scala/Cell.scala",
-		"/home/atsfour/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
-		"/home/atsfour/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
-		"/home/atsfour/workspace/sudoku/target/scalastyle-result.xml",
-		"/home/atsfour/workspace/sudoku/build.sbt",
-		"/home/atsfour/workspace/sudoku/src/main/scala/main.scala",
-		"/home/atsfour/workspace/sudoku/src/test/resources/2-2testcase.txt",
-		"/home/atsfour/workspace/sudoku/src/main/scala/Field.scala",
-		"/home/atsfour/workspace/sudoku/src/main/scala/Input.scala",
-		"/home/atsfour/workspace/sudoku/src/test/scala/FieldSpec.scala",
-		"/home/atsfour/workspace/sudoku/src/test/scala/CellSpec.scala",
-		"/home/atsfour/.config/sublime-text-3/Packages/User/Ensime.sublime-settings",
-		"/home/atsfour/.config/sublime-text-3/Packages/Ensime/Ensime.sublime-settings",
-		"/home/atsfour/workspace/sudoku/src/test/scala/HelloSpec.scala",
 		"/home/atsfour/workspace/sudoku/.gitignore",
-		"/home/atsfour/workspace/sudoku/sudoku.sublime-project",
-		"/home/atsfour/workspace/sicp.sublime-project",
-		"/home/atsfour/workspace/sicp/sicp.sublime-project",
-		"/home/atsfour/.config/sublime-text-3/Packages/SublimeSBT/README.md",
-		"/home/atsfour/workspace/sicp/sicp2.1.scm",
-		"/home/atsfour/workspace/sicp/sicp2.2-2.3.scm",
-		"/home/atsfour/workspace/sicp/sicp1.07.scm",
+		"/home/atsfour/workspace/sudoku/build.sbt",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku/Field.scala",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku/main.scala",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku/Problem.scala",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku/Solver.scala",
+		"/home/atsfour/workspace/sudoku/src/test/scala/CellTest.scala",
+		"/home/atsfour/workspace/sudoku/src/main/scala/org/atsfour/sudoku/Cell.scala",
+		"/home/atsfour/.config/sublime-text-3/Packages/Ensime/Ensime.sublime-settings",
+		"/home/atsfour/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/atsfour/workspace/sudoku/project/plugins.sbt",
+		"/home/atsfour/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/atsfour/workspace/sudoku/src/test/scala/FieldTest.scala",
+		"/home/atsfour/.config/sublime-text-3/Packages/Ensime/server/bin/server_",
+		"/home/atsfour/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/atsfour/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
 		"/home/atsfour/.config/sublime-text-3/Packages/User/SublimeREPL.sublime-settings",
 		"/home/atsfour/.config/sublime-text-3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
-		"/home/atsfour/workspace/sicp/sicp1.11.scm",
-		"/home/atsfour/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+		"/home/atsfour/.config/sublime-text-3/Packages/User/Ensime.sublime-settings",
+		"/home/atsfour/.config/sublime-text-3/Packages/Ensime/server/bin/server",
+		"/home/atsfour/.emacs.d/ensime/classpath_2.11.6_0.9.10-SNAPSHOT",
+		"/home/atsfour/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/atsfour/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/atsfour/.config/sublime-text-3/Packages/User/MozcInput.sublime-settings",
+		"/home/atsfour/.config/sublime-text-3/Packages/Mozc Input/MozcInput.sublime-settings",
+		"/home/atsfour/.config/sublime-text-3/Packages/Ｅｎｓｉｍｅ/server/bin/server",
+		"/home/atsfour/workspace/sicp/sicp1.07.scm",
+		"/home/atsfour/workspace/sicp/sicp.sublime-project",
+		"/home/atsfour/workspace/sicp/sicp2.1.scm",
+		"/home/atsfour/workspace/sicp/sicp1.11.scm"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -129,13 +253,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Seq",
+			"dimension"
 		],
-		"highlight": true,
+		"highlight": false,
 		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"size"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -146,18 +273,49 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/org/atsfour/sudoku/main.scala",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1631,
+								1631
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1386.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 30.0
 	},
 	"input":
 	{
-		"height": 37.0
+		"height": 38.0
 	},
 	"layout":
 	{
@@ -192,7 +350,7 @@
 	},
 	"output.sbt":
 	{
-		"height": 136.0
+		"height": 201.0
 	},
 	"output.sbt_error":
 	{
@@ -202,7 +360,7 @@
 	"project": "sudoku.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 70.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -240,7 +398,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 211.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
