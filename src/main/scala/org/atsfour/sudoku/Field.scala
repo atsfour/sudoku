@@ -1,22 +1,35 @@
 package org.atsfour.sudoku
 
-import scala.collection.immutable.IndexedSeq
-
 /**
  * Created by Atsushi on 13/12/10.
  */
-case class Field(val dimension: Int) {
-  
-  lazy val rows = dimension * dimension
-  lazy val rowsIndices: Range = 0 until rows
-  lazy val possibleNumbers = (1 to rows).toSet
+case class Field(val size: Int, inputs: Seq[Int]) {
+  require(math.pow(size, 4).toInt == inputs.length)
 
-  def position(x: Int, y: Int): Int = x * rows + y
+  lazy val rows = size * size
+  lazy val rowsIndices: Range = 0 until rows
+  lazy val possibleNumbers: Range = 1 to rows
+
+  var cells: Seq[Cell] = inputs.map(Cell(size, _))
+/*
+  var candidates: Seq[Set[Int]] = {
+    cells.zipWithIndex.map( t => c._1.numberOp match{
+      case Some(x) => Set(x)
+      case _ => Set(0)
+      })
+  }
+*/
+/*
+  def isValidIndex(index: Int): Boolean = indices.contains(index)
+  def isValidIndex(x: Int, y:Int): Boolean = {
+    rowsIndices.contains(x) && rowsIndices.contains(y)
+}
+*/
 
   def rowNum(index: Int): Int = index / rows
-  def columnNum(index: Int) = index % rows
-  def squareNum(index: Int): Int = (columnNum(index) / dimension).toInt +
-    (rowNum(index) / dimension).toInt * dimension
+  def columnNum(index: Int): Int = index % rows
+  def squareNum(index: Int): Int = (columnNum(index) / size).toInt +
+    (rowNum(index) / size).toInt * size
 
   def isSameRow(i1: Int)(i2: Int): Boolean = {
     //自分自身とは同じ行ではないとみなす。
@@ -37,5 +50,11 @@ case class Field(val dimension: Int) {
     //同じ行or列or正方形なら同じスコープ。
     isSameRow(i1)(i2) || isSameColumn(i1)(i2) || isSameSquare(i1)(i2)
   }
+
+/*
+  def numbersInSameScope(index: Int): Set(Int) = {
+    cells.zipWithIndex.filter((i, c) => )
+  }
+*/
 
 }
