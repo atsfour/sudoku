@@ -4,13 +4,12 @@ package org.atsfour.sudoku
  * Created by Atsushi on 13/12/10.
  */
 case class Field(val size: Int, inputs: Seq[Int]) {
-  require(math.pow(size, 4).toInt == inputs.length)
 
   lazy val rows = size * size
   lazy val rowsIndices: Range = 0 until rows
   lazy val possibleNumbers: Range = 1 to rows
 
-  var cells: Seq[Cell] = inputs.map(Cell(size, _))
+  var cells: Seq[Cell] = inputs.map(Cell(size, _, true))
 /*
   var candidates: Seq[Set[Int]] = {
     cells.zipWithIndex.map( t => c._1.numberOp match{

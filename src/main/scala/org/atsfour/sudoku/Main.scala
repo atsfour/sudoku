@@ -1,10 +1,9 @@
 package org.atsfour.sudoku
 
 import scala.math._
-import scala.io.Source
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.geometry.Insets
+import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.paint.Color
 import scalafx.scene.control.{ Button, TextField, Cell => fxCell }
@@ -16,7 +15,8 @@ import scalafx.scene.text.Font
  * Created by Atsushi on 13/12/10.
  */
 object Main extends JFXApp {
-  val field = Field(3, Seq.fill(81)(1))
+  val ui = new AbstracuUI
+  val field = ui.currentProblem.field
 
   val mainPaneWidth = 600.0
   val mainPaneHeight = 600.0
@@ -69,20 +69,17 @@ object Main extends JFXApp {
     pane
   }
 
+
   stage = new JFXApp.PrimaryStage {
     title.value = "scaka sudoku"
     width = 900
     height = 700
     scene = new Scene {
-      content = List(
-        mainPane, subPane)
+      content = new FlowPane {
+        children ++= List(mainPane, subPane)
+        orientation = Orientation.VERTICAL
+      }
     }
-  }
-
-  def readFile(file: String): List[List[Int]] = {
-    val source = Source.fromFile(file)
-    val problemList = source.getLines().toList.map(_.map(_.toString.toInt).toList)
-    problemList
   }
 
 }

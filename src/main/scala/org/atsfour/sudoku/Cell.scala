@@ -3,7 +3,7 @@ package org.atsfour.sudoku
 /**
  * Created by Atsushi on 13/12/10.
  */
-case class Cell(val size: Int, val number: Int) {
+case class Cell(val size: Int, val number: Int, val isFixed: Boolean) {
 
     require(number >= 0 && number <= size * size)
 
@@ -12,7 +12,4 @@ case class Cell(val size: Int, val number: Int) {
     case x:Int if x == 0 => None
   }
 
-  def isFixed: Boolean = {
-    !numberOp.isEmpty
-  }
 }
