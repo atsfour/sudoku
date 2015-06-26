@@ -5,11 +5,20 @@ package org.atsfour.sudoku
  */
 case class Field(val size: Int, inputs: Seq[Int]) {
 
+  type Index = (Int, Int)
+
   lazy val rows = size * size
   lazy val rowsIndices: Range = 0 until rows
   lazy val possibleNumbers: Range = 1 to rows
 
-  var cells: Seq[Cell] = inputs.map(Cell(size, _, true))
+  val cells: Seq[Cell] = inputs.map(i => Cell(size, i, i > 0))
+
+  def index(i: Int):Index = (this.rowNum(i), this.columnNum(i))
+  def linerIndex(index: Index) = index._1 + rows * index._2
+  def findCellIndex(f: Cell => Boolean): Index = index(cells.indexWhere(f(_)))
+
+  def apply(i:Int):Cell = this.cells(i)
+
 /*
   var candidates: Seq[Set[Int]] = {
     cells.zipWithIndex.map( t => c._1.numberOp match{
@@ -55,5 +64,9 @@ case class Field(val size: Int, inputs: Seq[Int]) {
     cells.zipWithIndex.filter((i, c) => )
   }
 */
+
+}
+
+object Field{
 
 }

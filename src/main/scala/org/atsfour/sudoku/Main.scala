@@ -3,12 +3,14 @@ package org.atsfour.sudoku
 import scala.math._
 import scalafx.Includes._
 import scalafx.application.JFXApp
-import scalafx.geometry.{Insets, Orientation}
+import scalafx.event.EventHandler
+import scalafx.geometry.{Insets, Orientation, Pos}
+import scalafx.scene.input.{KeyEvent, KeyCode, MouseEvent, MouseButton}
 import scalafx.scene.Scene
 import scalafx.scene.paint.Color
-import scalafx.scene.control.{ Button, TextField, Cell => fxCell }
+import scalafx.scene.control.{Button, TextField, TextArea}
 import scalafx.scene.shape.Rectangle
-import scalafx.scene.layout.{ FlowPane, GridPane }
+import scalafx.scene.layout.{FlowPane, GridPane }
 import scalafx.scene.text.Font
 
 /**
@@ -26,11 +28,29 @@ object Main extends JFXApp {
   val fieldBoxes: Seq[TextField] = {
     val cellBoxex = field.cells.map(c =>
       new TextField {
-        text = c.numberOp.getOrElse(0).toString
+        text = c.numberOp.getOrElse("").toString
         padding = Insets(1)
         prefWidth = mainPaneWidth / field.rows
         prefHeight = mainPaneHeight / field.rows
         font = Font(40)
+        alignment = Pos.CENTER
+        onKeyPressed = (ke: KeyEvent) => {
+          ke.code match {
+            case KeyCode.LEFT => ui.leftKey
+            case KeyCode.RIGHT => ui.rightKey
+            case KeyCode.UP => ui.upKey
+            case KeyCode.DOWN => ui.downKey
+            case _ => 
+          }
+          repaint
+        }
+        onMouseClicked = (me: MouseEvent) => {
+          me.button match {
+            case MouseButton.PRIMARY => ui.mouseClick
+            case _ =>
+          }
+          repaint
+        }
       })
     cellBoxex
   }
@@ -43,7 +63,7 @@ object Main extends JFXApp {
     }
   }
 
-  val messageBox = new TextField{
+  val messageBox = new TextArea{
     prefWidth = subPaneWidth
     prefHeight = subPaneHeight / 2
   }
@@ -78,8 +98,22 @@ object Main extends JFXApp {
       content = new FlowPane {
         children ++= List(mainPane, subPane)
         orientation = Orientation.VERTICAL
+        repaint
       }
     }
   }
 
+  def repaint: Unit = {
+
+  def moveFocus: Unit = {
+    mainPane.children(ui.currentCell).requestFocus
+  }
+
+  def updateMessage : Unit = {
+    this.messageBox.text = ui.message
+  }
+
+    moveFocus
+    updateMessage
+  }
 }
