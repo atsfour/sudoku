@@ -49,8 +49,8 @@ case class Field(val size: Int, inputs: Seq[Int]) {
 
   def rowNum(index: IndexLiner): Int = index / rows
   def columnNum(index: IndexLiner): Int = index % rows
-  def squareNum(index: IndexLiner): Int = (columnNum(index) / size).toInt +
-    (rowNum(index) / size).toInt * size
+  def squareNum(index: IndexLiner): Int = (columnNum(index) / size) +
+    (rowNum(index) / size) * size
 
   def isSameRow(i1: Int)(i2: Int): Boolean = {
     //自分自身とは同じ行ではないとみなす。

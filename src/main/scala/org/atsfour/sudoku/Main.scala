@@ -13,7 +13,7 @@ import scalafx.scene.text.Font
  * Created by Atsushi on 13/12/10.
  */
 object Main extends JFXApp {
-  val ui = new AbstracuUI
+  val ui = new AbstractUI
 
   val mainPaneWidth = 600.0
   val mainPaneHeight = 600.0
@@ -31,14 +31,12 @@ object Main extends JFXApp {
         case KeyCode.RIGHT => ui.rightKey()
         case KeyCode.UP => ui.upKey()
         case KeyCode.DOWN => ui.downKey()
-        case KeyCode.BACK_SPACE => {
+        case KeyCode.BACK_SPACE =>
           ui.buckSpace()
           this.text = ""
-        }
-        case k if k.isDigitKey => {
+        case k if k.isDigitKey =>
           ui.numKey(ke.getText)
           this.text = this.text.value + ke.getText
-        }
         case k:KeyCode => ui.updateMessage(currentCell.id.toString())
         case _ => 
       }

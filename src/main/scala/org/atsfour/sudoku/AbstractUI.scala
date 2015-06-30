@@ -1,6 +1,6 @@
 package org.atsfour.sudoku
 
-class AbstracuUI {
+class AbstractUI {
 
   var currentProblem = {
     val filename = "sample1.txt"

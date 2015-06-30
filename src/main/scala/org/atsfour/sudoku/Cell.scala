@@ -3,7 +3,7 @@ package org.atsfour.sudoku
 /**
  * Created by Atsushi on 13/12/10.
  */
-case class Cell(val size: Int, var number: Int, val isFixed: Boolean) {
+case class Cell(val size: Int, var number: Int, isFixed: Boolean) {
 
   def isValidNum: Boolean = 0 <= this.number && this.number <= size * size
 
@@ -14,7 +14,7 @@ case class Cell(val size: Int, var number: Int, val isFixed: Boolean) {
 
   def numberString: String = numberOp.map(_.toString).getOrElse("")
 
-  def numberWritten: Boolean = !this.numberOp.isEmpty
+  def numberWritten: Boolean = this.numberOp.isDefined
 
   def update(n: Int): Unit = {
     number = n
