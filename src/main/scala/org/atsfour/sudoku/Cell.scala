@@ -12,7 +12,7 @@ case class Cell(val size: Int, var number: Int, val isFixed: Boolean) {
     case x: Int if x == 0 => None
   }
 
-  def numberString: String = numberOp.map(_.toString).getOrElse(" ")
+  def numberString: String = numberOp.map(_.toString).getOrElse("")
 
   def numberWritten: Boolean = !this.numberOp.isEmpty
 

@@ -19,13 +19,14 @@ case class Problem(val name: String, inputList: List[Int]) {
     }
   }
 
-  def field: Field = fieldOp.get
-
-  def currentCell: Cell = field.cells(currentCellLinerIndex)
   var currentCellIndex = field.findCellIndex((c: Cell) => c.isFixed)
   var editing: Boolean = false
   val message: StringBuilder = new StringBuilder()
 
+
+  def field: Field = fieldOp.get
+
+  def currentCell: Cell = field(currentCellIndex)
   def currentCellLinerIndex: Int = field.index2dToLiner(currentCellIndex)
 
   def editCurrentCell(numString: String, keepPrevious: Boolean = true): Unit = {
@@ -36,10 +37,10 @@ case class Problem(val name: String, inputList: List[Int]) {
     }
   }
 
-  def moveLeft: Unit = moveBy(-1, 0)
-  def moveRight: Unit = moveBy(1, 0)
-  def moveUp: Unit = moveBy(0, -1)
-  def moveDown: Unit = moveBy(0, 1)
+  def moveLeft(): Unit = moveBy(-1, 0)
+  def moveRight(): Unit = moveBy(1, 0)
+  def moveUp(): Unit = moveBy(0, -1)
+  def moveDown(): Unit = moveBy(0, 1)
 
   def moveBy(dx: Int, dy: Int): Unit = {
     //マイナスを避けるためにrowsを足す。もっとエレガントにできる？
@@ -58,14 +59,14 @@ object Problem {
   def readFromFile(url: java.net.URL): Problem = {
     val source = scala.io.Source.fromURL(url)
     try {
-      val problemString = source.getLines.toList
+      val problemString = source.getLines().toList
       val problemName = problemString.takeWhile(_.head == '#').mkString(" ")
       val problemList = problemString.dropWhile(_.head == '#').mkString(",").replaceAll(" ", "0").split(",").toList.map(_.toInt)
       Problem(problemName, problemList)
     } catch {
       case e: Throwable => Problem.empty
     } finally {
-      source.close
+      source.close()
     }
   }
 

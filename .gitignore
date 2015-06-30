@@ -1,4 +1,5 @@
 /RUNNING_PID
+/.idea/
 /project/*-shim.sbt
 /project/project/
 /project/target/
@@ -8,4 +9,4 @@
 /*sublime*
 /.cache*
 /scalastyle*
-/activator-launch.jar
+/activator*
