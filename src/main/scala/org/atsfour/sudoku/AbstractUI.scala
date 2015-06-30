@@ -2,28 +2,35 @@ package org.atsfour.sudoku
 
 class AbstracuUI {
 
-  var currentProblem = Problem.readFromFile(
-    this.getClass.getClassLoader.getResource("sample1.txt")
-    )
+  var currentProblem = {
+    val filename = "sample1.txt"
+    val res = Problem.readFromFile(
+      this.getClass.getClassLoader.getResource(filename))
+    res
+  }
 
-  var message: String = ""
+  def rows:Int = currentProblem.rows
+  //ひとまず正方形の問題を扱うため、columns = rows が成立している。
+  def columns: Int = currentProblem.rows
 
-  def currentCell:Int = currentProblem.getCurrentCell
+  def message: String = currentProblem.message.toString
+
+  //def currentCellLinerIndex: Int = currentProblem.currentCellLinerIndex
+
+  def numberString(x: Int, y: Int): String = currentProblem.field(x, y).numberString
 
   def leftKey: Unit = currentProblem.moveLeft
   def rightKey: Unit = currentProblem.moveRight
   def upKey: Unit = currentProblem.moveUp
   def downKey: Unit = currentProblem.moveDown
 
-  def keyNum: Unit = {
+  def numKey(strNum :String): Unit = currentProblem.editCurrentCell(strNum, keepPrevious = true)
 
-  }
+  def buckSpace: Unit = currentProblem.editCurrentCell("0", keepPrevious = false)
 
-  def mouseClick: Unit = {
-
-  }
+  def mouseClick(x:Int, y:Int): Unit = currentProblem.moveTo(x, y)
 
   def updateMessage(m: String): Unit = {
-    message = message + m + "\n"
+    currentProblem.message.append(m + "\n")
   }
 }

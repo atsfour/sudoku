@@ -5,16 +5,18 @@ package org.atsfour.sudoku
  */
 case class Cell(val size: Int, var number: Int, val isFixed: Boolean) {
 
-    require(number >= 0 && number <= size * size)
+  def isValidNum: Boolean = 0 <= this.number && this.number <= size * size
 
-  def numberOp: Option[Int] = this.number match{
-    case x:Int if x > 0 => Some(x)
-    case x:Int if x == 0 => None
+  def numberOp: Option[Int] = this.number match {
+    case x: Int if x > 0 => Some(x)
+    case x: Int if x == 0 => None
   }
+
+  def numberString: String = numberOp.map(_.toString).getOrElse(" ")
 
   def numberWritten: Boolean = !this.numberOp.isEmpty
 
-  def update(n: Int):Unit = {number = n}
-
-  override def toString = numberOp.map(_.toString).getOrElse(" ")
+  def update(n: Int): Unit = {
+    number = n
+  }
 }
