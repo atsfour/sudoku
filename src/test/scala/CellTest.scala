@@ -1,3 +1,4 @@
+
 package org.atsfour.sudoku
 
 import org.scalatest._
@@ -14,8 +15,12 @@ class CellSpec extends FlatSpec with Matchers {
     an [IllegalArgumentException] should be thrownBy Cell(2, 5, false)
   }
 
-  "numberWritten" should "0以外の数値が与えられると、そのセルは決定済みとする" in {
-    Cell(3,0, false).numberWritten should be (false)
-    Cell(3,4, false).numberWritten should be (true)
+  "numberWritten" should "0以外の数値が与えられると、そのセルは埋まったとする" in {
+    Cell(3, 0, false).numberWritten should be (false)
+    Cell(3, 4, false).numberWritten should be (true)
+  }
+
+  "numberSrting" should "入っている数字の文字列を返す" in {
+    Cell(3, 5, false).numberString should be ("5")
   }
 }

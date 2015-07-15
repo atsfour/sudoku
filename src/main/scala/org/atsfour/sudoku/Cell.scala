@@ -1,11 +1,10 @@
+/**
+ * Created by Atsfour on 13/12/10.
+ */
+
 package org.atsfour.sudoku
 
-/**
- * Created by Atsushi on 13/12/10.
- */
-case class Cell(val size: Int, var number: Int, isFixed: Boolean) {
-
-  def isValidNum: Boolean = 0 <= this.number && this.number <= size * size
+case class Cell(var number: Int, isFixed: Boolean) {
 
   def numberOp: Option[Int] = this.number match {
     case x: Int if x > 0 => Some(x)

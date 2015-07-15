@@ -3,17 +3,17 @@ package org.atsfour.sudoku
 import scalafx.Includes._
 import scalafx.application.JFXApp
 import scalafx.geometry.{Insets, Orientation, Pos}
-import scalafx.scene.Scene
+import scalafx.scene.{Scene, Node}
 import scalafx.scene.control.{Button, TextArea, TextField}
 import scalafx.scene.input.{KeyCode, KeyEvent, MouseButton, MouseEvent}
-import scalafx.scene.layout.{FlowPane, GridPane}
+import scalafx.scene.layout.{FlowPane, GridPane, TilePane}
 import scalafx.scene.text.Font
 
 /**
  * Created by Atsushi on 13/12/10.
  */
 object Main extends JFXApp {
-  val ui = new AbstractUI
+  val ui = AbstractUI
 
   val mainPaneWidth = 600.0
   val mainPaneHeight = 600.0
@@ -21,10 +21,13 @@ object Main extends JFXApp {
   val subPaneHeight = 600.0
 
   class SudokuCell(val posX: Int, val posY: Int) extends TextField {
-    id = s"Cell( $posX , $posY )"
+    id = s"Cell(${posX},${posY})"
     editable = false
     padding = Insets(1)
     alignment = Pos.CENTER
+    font = Font(40)
+    prefWidth = mainPaneWidth * 0.9 / ui.columns
+    prefHeight = mainPaneHeight * 0.9 / ui.rows
     onKeyPressed = (ke: KeyEvent) => {
       ke.code match {
         case KeyCode.LEFT => ui.leftKey()
@@ -36,8 +39,8 @@ object Main extends JFXApp {
           this.text = ""
         case k if k.isDigitKey =>
           ui.numKey(ke.getText)
-          this.text = this.text.value + ke.getText
-        case k:KeyCode => ui.updateMessage(currentCell.id.toString())
+          this.update()
+        case k:KeyCode => ui.updateMessage(currentCell.id.get)
         case _ => 
       }
       repaint()
@@ -49,6 +52,7 @@ object Main extends JFXApp {
       }
       repaint()
     }
+    def update(): Unit = this.text = ui.numberString(posX, posY)
   }
 
   val btEnd: Button = new Button {
@@ -62,10 +66,13 @@ object Main extends JFXApp {
   val messageBox = new TextArea {
     prefWidth = subPaneWidth
     prefHeight = subPaneHeight / 2
+    wrapText = true
   }
 
-  val mainPane: GridPane = {
-    val pane = new GridPane { padding = Insets(10) }
+  val mainPane: TilePane = {
+    val pane = new TilePane { padding = Insets(10) }
+    pane.prefRows = ui.rows
+    pane.prefColumns = ui.columns
     pane.maxHeight = mainPaneHeight
     pane.maxWidth = mainPaneWidth
     pane
@@ -94,16 +101,22 @@ object Main extends JFXApp {
     }
   }
 
-  def currentCell = mainPane.children(ui.currentCellLinerIndex)
+  def currentCell:Node = mainPane.children(ui.currentCellLinerIndex)
 
   def repaint(): Unit = {
     def moveFocus(): Unit = {
       currentCell.requestFocus()
     }
     def updateMessage(): Unit = {
-      this.messageBox.text = ui.message
+      this.messageBox.text = ui.message.result()
     }
+    def updateCell(): Unit = currentCell match {
+      case t: TextField => t.text = ui.currentCellValue
+      case _ =>
+    }
+
     moveFocus()
+    updateCell()
     updateMessage()
   }
 
@@ -115,7 +128,7 @@ object Main extends JFXApp {
     } {
       val cell = new SudokuCell(x, y)
       cell.text = ui.numberString(x, y)
-      mainPane.add(cell, x, y)
+      mainPane.children += cell
     }
     mainPane.autosize()
   }
